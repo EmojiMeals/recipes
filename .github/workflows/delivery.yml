@@ -14,7 +14,7 @@ jobs:
       - name: test
         run: |
           echo ${{ matrix.watchers }}
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 #       - name: Compile .css from .scss
 #         uses: gha-utilities/sass-build@v0.1.6
 #         with:
