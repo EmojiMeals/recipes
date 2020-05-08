@@ -5,17 +5,32 @@ on:
     branches: [ master, ubereats ]
 
 jobs:
-  deliver:
-    runs-on: ubuntu-latest
+  loopcheck:
+    strategy:
+      matrix:
+        watchers: [meals-ruby,meals-go,meals-java]
+    runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2
-      - name: ls
-        run: ls
-      - name: dispatch to watchers
-        env:
-          WATCHERS: |
-            - meals-ruby
-            - meals-go
-            - meals-java
-        run: for w in $WATCHERS; do echo w; done
-        
+      - name: test
+        run: |
+          echo ${{ matrix.watchers }}
+      - uses: actions/checkout@v1
+#       - name: Compile .css from .scss
+#         uses: gha-utilities/sass-build@v0.1.6
+#         with:
+#           source: scss/${{ matrix.scssfiles }}.scss
+#           destination: css/${{ matrix.scssfiles }}.css
+#   deliver:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: ls
+#         run: ls
+#       - name: dispatch to watchers
+#         env:
+#           WATCHERS: |
+#             - meals-ruby
+#             - meals-go
+#             - meals-java
+#         run: for w in $WATCHERS; do echo w; done
+      
