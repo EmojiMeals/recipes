@@ -20,3 +20,4 @@ jobs:
           repository: EmojiMeals/${{ matrix.watchers }}
           # A custom webhook event name.
           event-type: recipe-dispatch
+          client-payload: '{"github": ${{ toJson(github) }}}'
