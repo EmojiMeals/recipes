@@ -13,9 +13,9 @@ jobs:
         run: ls
       - name: dispatch to watchers
         env:
-          watchers: |
+          WATCHERS: |
             - meals-ruby
             - meals-go
             - meals-java
-        run: for w in watchers; do echo w; done
+        run: for w in $WATCHERS; do echo w; done
         
