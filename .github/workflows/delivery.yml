@@ -18,23 +18,14 @@ jobs:
       - name: dispatch
         run: |
           curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/EmojiMeals/${{ matrix.watchers }}/dispatches --data '{"event_type": "build_application"}'
-    
-#       - name: Compile .css from .scss
-#         uses: gha-utilities/sass-build@v0.1.6
-#         with:
-#           source: scss/${{ matrix.scssfiles }}.scss
-#           destination: css/${{ matrix.scssfiles }}.css
-#   deliver:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: ls
-#         run: ls
-#       - name: dispatch to watchers
-#         env:
-#           WATCHERS: |
-#             - meals-ruby
-#             - meals-go
-#             - meals-java
-#         run: for w in $WATCHERS; do echo w; done
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1.1.0
+        with:
+          # A repo scoped GitHub Personal Access Token
+          token: ${{ secrets.access_token }}
+          # The full name of the repository to send the dispatch. Defaults to the current repository.
+          repository: EmojiMeals/${{ matrix.watchers }}
+          # A custom webhook event name.
+          event-type: recipe_dispatch
+          # JSON payload with extra information about the webhook event that your action or worklow may use.
       
