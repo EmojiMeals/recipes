@@ -20,5 +20,3 @@ jobs:
           repository: EmojiMeals/${{ matrix.watchers }}
           # A custom webhook event name.
           event-type: recipe-dispatch
-          # JSON payload with extra information about the webhook event that your action or worklow may use.
-          payload: recipes.json
